@@ -5,10 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import GlobalContext from "../context/Context";
+import ListItem from "../components/ListItem";
+import useContacts from "../hooks/useHooks";
 
 const HomeScreen = ({ navigation }) => {
   const { currentUser } = auth;
   const { rooms, setRooms } = useContext(GlobalContext);
+  const contacts = useContacts();
   const chatsQuery = query(
     collection(db, "rooms"),
     where("participantsArray", "array-contains", currentUser.email)
@@ -30,6 +33,14 @@ const HomeScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, []);
 
+  function getUserB(user, contacts) {
+    const userContact = contacts.find((c) => c.email === user.email);
+    if (userContact && userContact.contactName) {
+      return { ...user, contactName: userContact.contactName };
+    }
+    return user;
+  }
+
   return (
     <SafeAreaView style={styles.parent}>
       <View style={styles.headerContainer}>
@@ -50,6 +61,18 @@ const HomeScreen = ({ navigation }) => {
             Hello, {currentUser.displayName}
           </Text>
         </View>
+      </View>
+      <View>
+        {rooms.map((room) => (
+          <ListItem
+            type="chat"
+            description={room.lastMessage.text}
+            key={room.id}
+            room={room}
+            time={room.lastMessage.createdAt}
+            user={getUserB(room.userB, contacts)}
+          />
+        ))}
       </View>
       <TouchableOpacity
         style={{

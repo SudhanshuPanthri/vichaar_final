@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SplashScreen from "../screens/SplashScreen";
+// import SplashScreen from "../screens/SplashScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -9,6 +9,7 @@ import HomeScreen from "../screens/HomeScreen";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/config";
 import ContactScreen from "../screens/ContactScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ const Navigation = () => {
           )}
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="ContactScreen" component={ContactScreen} />
+          <Stack.Screen name="ChatScreen" component={ChatScreen} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
