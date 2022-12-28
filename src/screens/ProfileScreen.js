@@ -54,6 +54,7 @@ const ProfileScreen = ({ navigation }) => {
     const userData = {
       displayName,
       email: user.email,
+      // photoURL,
     };
     if (photoURL) {
       userData.photoURL = photoURL;

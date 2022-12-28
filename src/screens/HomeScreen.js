@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
     collection(db, "rooms"),
     where("participantsArray", "array-contains", currentUser.email)
   );
-
+  // console.log(currentUser);
   useEffect(() => {
     const unsubscribe = onSnapshot(chatsQuery, (querySnapshot) => {
       const parsedChats = querySnapshot.docs
@@ -46,7 +46,12 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.headerContainer}>
         <View style={{ height: 90, width: 90 }}>
           <Image
-            source={require("../assets/chizuru.jpg")}
+            // source={require("../assets/chizuru.jpg")}
+            source={
+              currentUser.photoURL
+                ? { uri: currentUser.photoURL }
+                : require("../assets/chizuru.jpg")
+            }
             style={{ height: "100%", width: "100%", borderRadius: 50 }}
           />
         </View>
