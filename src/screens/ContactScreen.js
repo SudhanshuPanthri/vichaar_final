@@ -45,7 +45,7 @@ const ContactScreen = ({ navigation }) => {
 };
 
 function ContactPreview({ contact, image }) {
-  const { rooms } = useContext(GlobalContext);
+  const { unfilteredRooms } = useContext(GlobalContext);
   const [user, setUser] = useState(contact);
   useEffect(() => {
     const q = query(
@@ -65,7 +65,7 @@ function ContactPreview({ contact, image }) {
       type="contacts"
       user={user}
       image={image}
-      room={rooms.find((room) =>
+      room={unfilteredRooms.find((room) =>
         room.participantsArray.includes(contact.email)
       )}
     />

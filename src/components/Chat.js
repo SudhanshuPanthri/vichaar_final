@@ -18,7 +18,7 @@ import { GiftedChat } from "react-native-gifted-chat";
 const randomId = nanoid();
 const Chat = () => {
   const [roomHash, setRoomHash] = useState();
-  const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState([]);
   const { currentUser } = auth;
   const route = useRoute();
   const room = route.params.room;
@@ -75,9 +75,9 @@ const Chat = () => {
         .filter(({ type }) => type === "added")
         .map(({ doc }) => {
           const message = doc.data();
-          return { ...message, createdAt: message.createdAt.toData() };
+          return { ...message, createdAt: message.createdAt.toDate() };
         });
-      appendMessages(messages);
+      appendMessages(messagesRef);
     });
     return () => unsubscribe();
   }, []);
@@ -98,13 +98,12 @@ const Chat = () => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text>chat hai bhai</Text>
+    <View style={{ height: "100%" }}>
       <GiftedChat
+        onSend={onSend}
         messages={messages}
         user={senderUser}
         renderAvatar={null}
-        onSend={onSend}
       />
     </View>
   );

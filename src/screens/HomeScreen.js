@@ -10,7 +10,7 @@ import useContacts from "../hooks/useHooks";
 
 const HomeScreen = ({ navigation }) => {
   const { currentUser } = auth;
-  const { rooms, setRooms } = useContext(GlobalContext);
+  const { rooms, setRooms, setUnfilteredRooms } = useContext(GlobalContext);
   const contacts = useContacts();
   const chatsQuery = query(
     collection(db, "rooms"),
@@ -19,16 +19,15 @@ const HomeScreen = ({ navigation }) => {
   // console.log(currentUser);
   useEffect(() => {
     const unsubscribe = onSnapshot(chatsQuery, (querySnapshot) => {
-      const parsedChats = querySnapshot.docs
-        .filter((doc) => doc.data().lastMessage)
-        .map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-          userB: doc
-            .data()
-            .paticipants.find((p) => p.email !== currentUser.email),
-        }));
-      setRooms(parsedChats);
+      const parsedChats = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+        userB: doc
+          .data()
+          .participants.find((p) => p.email !== currentUser.email),
+      }));
+      setUnfilteredRooms(parsedChats);
+      setRooms(parsedChats.filter((doc) => doc.lastMessage));
     });
     return () => unsubscribe();
   }, []);
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    borderWidth: 1,
+    // borderWidth: 1,
     flex: 0.16,
     padding: 10,
     justifyContent: "center",

@@ -34,8 +34,7 @@ const ListItem = ({ type, description, user, time, room, image }) => {
           </Text>
         </View>
         <View style={{ height: "30%", justifyContent: "center" }}>
-          {description && <Text>lorem ipsiom aksdihjasdm </Text>}
-          {/* <Text>kya haal bhai i am a good boy bixth</Text> */}
+          {description && <Text>{description}</Text>}
         </View>
       </View>
     </TouchableOpacity>
@@ -47,12 +46,10 @@ export default ListItem;
 const styles = StyleSheet.create({
   parent: {
     padding: 5,
-    borderWidth: 1,
     height: 80,
     flexDirection: "row",
   },
   wrapper: {
-    borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
   },
