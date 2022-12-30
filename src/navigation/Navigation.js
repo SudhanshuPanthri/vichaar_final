@@ -51,6 +51,7 @@ const Navigation = () => {
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="ContactScreen" component={ContactScreen} />
           <Stack.Screen name="ChatScreen" component={ChatScreen} />
+          <Stack.Screen name="SignInScreen" component={SignInScreen} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

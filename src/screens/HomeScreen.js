@@ -1,8 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useContext } from "react";
+import { ImageBackground, LogBox } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 import { auth, db } from "../firebase/config";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import { onAuthStateChanged } from "firebase/auth";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import GlobalContext from "../context/Context";
 import ListItem from "../components/ListItem";
@@ -12,6 +19,7 @@ const HomeScreen = ({ navigation }) => {
   const { currentUser } = auth;
   const { rooms, setRooms, setUnfilteredRooms } = useContext(GlobalContext);
   const contacts = useContacts();
+  LogBox.ignoreAllLogs();
   const chatsQuery = query(
     collection(db, "rooms"),
     where("participantsArray", "array-contains", currentUser.email)
@@ -40,12 +48,31 @@ const HomeScreen = ({ navigation }) => {
     return user;
   }
 
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut().then(() => {
+        navigation.replace("SignInScreen");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <SafeAreaView style={styles.parent}>
+    // <SafeAreaView style={styles.parent}>
+
+    <ImageBackground
+      source={require("../assets/chatBg.jpg")}
+      style={{ flex: 1 }}
+    >
+      <StatusBar
+        translucent
+        backgroundColor={"transparent"}
+        barStyle={"dark-content"}
+      />
       <View style={styles.headerContainer}>
         <View style={{ height: 90, width: 90 }}>
           <Image
-            // source={require("../assets/chizuru.jpg")}
             source={
               currentUser.photoURL
                 ? { uri: currentUser.photoURL }
@@ -65,8 +92,28 @@ const HomeScreen = ({ navigation }) => {
             Hello, {currentUser.displayName}
           </Text>
         </View>
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            right: 15,
+            top: 10,
+            height: 45,
+            width: 45,
+            backgroundColor: "#000",
+            borderRadius: 50,
+            padding: 10,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onPress={handleSignOut}
+        >
+          <Image
+            source={require("../assets/signout.png")}
+            style={{ height: "85%", width: "85%", tintColor: "#fff" }}
+          />
+        </TouchableOpacity>
       </View>
-      <View>
+      <View style={{ padding: 10 }}>
         {rooms.map((room) => (
           <ListItem
             type="chat"
@@ -82,7 +129,7 @@ const HomeScreen = ({ navigation }) => {
         style={{
           position: "absolute",
           bottom: 40,
-          right: 30,
+          right: 15,
           borderWidth: 1,
           borderRadius: 50,
           padding: 5,
@@ -95,7 +142,8 @@ const HomeScreen = ({ navigation }) => {
           style={{ tintColor: "#fff" }}
         />
       </TouchableOpacity>
-    </SafeAreaView>
+    </ImageBackground>
+    // </SafeAreaView>
   );
 };
 
@@ -106,8 +154,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    // borderWidth: 1,
-    flex: 0.16,
+    // flex: 0.16,
+    marginTop: 45,
     padding: 10,
     justifyContent: "center",
     alignItems: "center",

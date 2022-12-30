@@ -8,7 +8,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { signUp } from "../firebase/config";
+// import { signUp } from "../firebase/config";
+import { LogBox } from "react-native";
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -16,6 +17,7 @@ const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
+  LogBox.ignoreAllLogs();
 
   const handleSignup = async () => {
     if (password !== confirmPassword) {
@@ -23,7 +25,6 @@ const SignUpScreen = ({ navigation }) => {
     } else {
       try {
         await createUserWithEmailAndPassword(auth, email, password).then(() => {
-          console.log("user created");
           navigation.replace("ProfileScreen");
         });
       } catch (err) {

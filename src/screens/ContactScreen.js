@@ -22,14 +22,16 @@ const ContactScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={{ width: "40%" }}
+          onPress={() => navigation.goBack()}
+        >
           <Image
             source={require("../assets/icons8-back-90.png")}
             style={{ height: 30, width: 30 }}
           />
         </TouchableOpacity>
-        <Text style={{ fontSize: 18, fontWeight: "500" }}>Contacts</Text>
-        <Text>abcd</Text>
+        <Text style={{ fontSize: 20, fontWeight: "500" }}>Contacts</Text>
       </View>
       <View style={styles.contentContainer}>
         <FlatList
@@ -38,6 +40,7 @@ const ContactScreen = ({ navigation }) => {
           renderItem={({ item }) => (
             <ContactPreview contact={item} image={image} />
           )}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>
@@ -77,13 +80,12 @@ export default ContactScreen;
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
-    borderWidth: 1,
     padding: 10,
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
   },
   contentContainer: {
     marginVertical: 5,
-    // padding: 10,
+    padding: 10,
   },
 });

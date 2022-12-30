@@ -91,7 +91,7 @@ const ProfileScreen = ({ navigation }) => {
 
     blob.close();
     const url = await getDownloadURL(snapshot.ref);
-    return url, filename;
+    return { url, filename };
   };
 
   // if (!permissionStatus) {
