@@ -59,12 +59,11 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    // <SafeAreaView style={styles.parent}>
-
-    <ImageBackground
-      source={require("../assets/chatBg.jpg")}
+    <SafeAreaView style={styles.parent}>
+      {/* <ImageBackground
+       source={require("../assets/chatBg.jpg")}
       style={{ flex: 1 }}
-    >
+    > */}
       <StatusBar
         translucent
         backgroundColor={"transparent"}
@@ -142,8 +141,8 @@ const HomeScreen = ({ navigation }) => {
           style={{ tintColor: "#fff" }}
         />
       </TouchableOpacity>
-    </ImageBackground>
-    // </SafeAreaView>
+      {/* </ImageBackground> */}
+    </SafeAreaView>
   );
 };
 
@@ -152,10 +151,11 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   parent: {
     flex: 1,
+    backgroundColor: "#fff",
   },
   headerContainer: {
     // flex: 0.16,
-    marginTop: 45,
+    marginTop: 15,
     padding: 10,
     justifyContent: "center",
     alignItems: "center",

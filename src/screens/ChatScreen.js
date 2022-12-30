@@ -175,7 +175,7 @@ const ChatScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
           <Image
@@ -183,11 +183,11 @@ const ChatScreen = ({ navigation }) => {
             style={{ height: 30, width: 30 }}
           />
         </TouchableOpacity>
-        <Image
+        {/* <Image
           // source={route.params.image}
           source={
-            route.params.image
-              ? { uri: route.params.image }
+            route.params.user.image
+              ? { uri: route.params.user.image }
               : require("../assets/chizuru.jpg")
           }
           style={{
@@ -197,7 +197,22 @@ const ChatScreen = ({ navigation }) => {
             borderRadius: 50,
             marginHorizontal: 15,
           }}
-        />
+        /> */}
+        <View
+          style={{
+            height: 40,
+            width: 40,
+            borderRadius: 50,
+            justifyContent: "center",
+            alignItems: "center",
+            marginHorizontal: 10,
+            backgroundColor: "#000",
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 16 }}>
+            {route.params.user.contactName.charAt(0)}
+          </Text>
+        </View>
         <Text style={{ fontSize: 18, fontWeight: "500" }}>
           {route.params.user.contactName || route.params.user.displayName}
         </Text>
