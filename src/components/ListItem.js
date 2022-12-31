@@ -65,7 +65,9 @@ const ListItem = ({ type, description, user, time, room, image }) => {
             </View>
             <View style={{ height: "30%", justifyContent: "center" }}>
               {description && (
-                <Text style={{ fontSize: 16 }}>{description}</Text>
+                <Text style={{ fontSize: 16, fontWeight: "500" }}>
+                  {description}
+                </Text>
               )}
             </View>
           </View>

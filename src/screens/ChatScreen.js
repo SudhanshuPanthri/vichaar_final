@@ -183,21 +183,6 @@ const ChatScreen = ({ navigation }) => {
             style={{ height: 30, width: 30 }}
           />
         </TouchableOpacity>
-        {/* <Image
-          // source={route.params.image}
-          source={
-            route.params.user.image
-              ? { uri: route.params.user.image }
-              : require("../assets/chizuru.jpg")
-          }
-          style={{
-            height: 40,
-            width: 40,
-            borderWidth: 1,
-            borderRadius: 50,
-            marginHorizontal: 15,
-          }}
-        /> */}
         <View
           style={{
             height: 40,
@@ -296,6 +281,10 @@ const ChatScreen = ({ navigation }) => {
             />
           );
         }}
+      />
+      <Image
+        source={require("../assets/cat.png")}
+        style={{ position: "absolute", zIndex: -10, opacity: 0.5, top: 120 }}
       />
     </SafeAreaView>
   );

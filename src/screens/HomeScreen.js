@@ -60,17 +60,13 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.parent}>
-      {/* <ImageBackground
-       source={require("../assets/chatBg.jpg")}
-      style={{ flex: 1 }}
-    > */}
       <StatusBar
         translucent
         backgroundColor={"transparent"}
         barStyle={"dark-content"}
       />
       <View style={styles.headerContainer}>
-        <View style={{ height: 90, width: 90 }}>
+        <View style={{ height: 90, width: 90, zIndex: 99 }}>
           <Image
             source={
               currentUser.photoURL
@@ -80,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
             style={{ height: "100%", width: "100%", borderRadius: 50 }}
           />
         </View>
-        <View style={{ marginTop: 10 }}>
+        <View style={{ marginTop: 10, zIndex: 99 }}>
           <Text
             style={{
               fontSize: 18,
@@ -103,6 +99,7 @@ const HomeScreen = ({ navigation }) => {
             padding: 10,
             justifyContent: "center",
             alignItems: "center",
+            zIndex: 99,
           }}
           onPress={handleSignOut}
         >
@@ -111,8 +108,29 @@ const HomeScreen = ({ navigation }) => {
             style={{ height: "85%", width: "85%", tintColor: "#fff" }}
           />
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            left: 15,
+            top: 10,
+            height: 45,
+            width: 45,
+            backgroundColor: "#000",
+            borderRadius: 50,
+            padding: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 99,
+          }}
+          onPress={() => navigation.navigate("AppInfoScreen")}
+        >
+          <Image
+            source={require("../assets/info.png")}
+            style={{ height: "85%", width: "85%", tintColor: "#fff" }}
+          />
+        </TouchableOpacity>
       </View>
-      <View style={{ padding: 10 }}>
+      <View style={{ padding: 10, zIndex: 99 }}>
         {rooms.map((room) => (
           <ListItem
             type="chat"
@@ -133,6 +151,7 @@ const HomeScreen = ({ navigation }) => {
           borderRadius: 50,
           padding: 5,
           backgroundColor: "#000",
+          zIndex: 100,
         }}
         onPress={() => navigation.navigate("ContactScreen")}
       >
@@ -141,7 +160,16 @@ const HomeScreen = ({ navigation }) => {
           style={{ tintColor: "#fff" }}
         />
       </TouchableOpacity>
-      {/* </ImageBackground> */}
+      <Image
+        source={require("../assets/idea.png")}
+        style={{
+          position: "absolute",
+          bottom: -50,
+          height: 300,
+          width: "100%",
+          zIndex: 0,
+        }}
+      />
     </SafeAreaView>
   );
 };
