@@ -4,9 +4,10 @@
     "slug": "vichaar_final",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./src/assets/logo1.png",
     "userInterfaceStyle": "light",
     "splash": {
-      // "image": "./assets/splash.png",
+      // "image": "./src/assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,11 +21,17 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.sudhanshu_panthri.vichaar_final",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       }
     },
-    "web": {
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "7bfe22c3-990a-4322-93b6-b93e5761490f"
+      }
     }
   }
 }
